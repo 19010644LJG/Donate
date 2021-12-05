@@ -1,0 +1,219 @@
+{% load static %}
+{% load static %}
+<head>
+
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+.donate{
+    margin-top : 50px;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+.donate_select{
+    margin-top : 200px;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+.input{
+  margin-top : 30px;
+  display: grid;
+  place-items: center;
+}
+.button{
+  margin-top : 10px;
+  display: grid;
+  place-items: center;
+}
+.input_text{
+ height : 50px;
+ width : 300px;
+}
+html {
+scroll-behavior: smooth;
+}
+.logout{
+	margin-left : 30px;
+}
+#intro{
+	margin-top : 250px;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+#intro_name{
+	margin-top : 30px;
+	text-align: center;
+	font-size: 3.5rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+.background {
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.background-dimmed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	opacity: 0.75;
+}
+
+.background-image {
+	position: absolute;
+	z-index: -1;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image : url("{% static 'background.jpg' %}");
+	background-size: cover;
+	background-position: center 35%;
+}
+
+header {
+	position: relative;
+	z-index: 10;
+	width:100%;
+	height:80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color : white;
+}
+
+* {
+	margin:0;
+	padding:0;
+	color:#000;
+	font-family: 'Noto Sans KR';
+	box-sizing: border-box;
+}
+
+.fn-font {
+	font-family: 'Noto Sans KR';
+	font-weight : bold;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+.container {
+	width:1440px;
+	margin:0 auto;
+}
+
+header  h2 {
+	font-size: 2.5rem;
+	font-weight: 200;
+	font-family: 'Black Han Sans', sans-serif;
+}
+
+header > nav {
+	width:600px;
+	height:100%;
+}
+
+header ul {
+	width:100%;
+	height: 100%;
+
+}
+
+header ul > li {
+	font-size:20px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.header_container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.header_container__menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight : bold;
+}
+
+.header_container__menu a {
+	font-family: 'Black Han Sans', sans-serif;
+	font-size : 1.25rem;
+	font-weight : 100;
+}
+
+.header_container__button {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.header_container__button a + a {
+	margin-left: 20px;
+}
+</style>
+<body>
+<div class="background">
+	<div class="background-dimmed"></div>
+	<div class="background-image"></div>
+</div>
+<header>
+	<div class="header_container">
+		<a href="{% url 'index' %}">
+		<h2>돌고도네</h2>
+		</a>
+		<div class="header_container__menu">
+			<a href="{% url 'index' %}">소개</a>
+				<a href="{% url 'donate' %}">기부</a>
+				{% if request.session.name == 'admin' %}
+				<a href="{% url 'donate_admin' %}">기부 내역 확인</a>
+				{% else %}
+				<a href="{% url 'donate_confirm' %}">기부 내역 확인</a>
+				{% endif %}
+			<a href="{% url 'index' %}#question">문의</a>
+		</div>
+		<div class="header_container__button">
+			{% if request.session.name != None %}
+				{{request.session.name}}님 환영합니다.
+				<a href="{% url 'logout' %}" class="logout">로그아웃</a>
+			{% else %}
+				<a href="{% url 'login' %}">로그인</a>
+				<a href="{% url 'register' %}">회원가입</a>
+			{% endif %}
+		</div>
+	</div>
+</header>
+    <form action="" method="post">
+		{% csrf_token %}
+		<div class ="donate_select">기부할 대상을 적어주세요</div>
+    <div class="input"><input type="text" class="input_text" name="select"></div>
+    <div class ="donate">기부할 금액을 적어주세요</div>
+    <div class="input"><input type="text" class="input_text" name="donation"></div>
+    <div class="button"><button type="submit" class="input_text">기부하기</button></div>
+    </form>
+</body>

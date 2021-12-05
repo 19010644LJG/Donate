@@ -1,0 +1,61 @@
+<div class="register">
+        <h3>회원가입</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="flex">
+                <ul class="container">
+                    <li class="item center">
+                        이름
+                    </li>
+                        <input type="text" name="name" autofocus required>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        아이디
+                    </li>
+                        <input type="text" name="id" placeholder="아이디를 입력하세요." required>
+                        <button class="idcheck">중복확인</button>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        비밀번호
+                    </li>
+                        <input type="password" name="password" placeholder="비밀번호를 입력하세요." required>
+                    </li>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        비밀번호 확인
+                    </li>
+                        <input type="password" name="password_confirm" placeholder="비밀번호를 입력하세요." required>
+                    </li>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        생년월일
+                    </li>
+                        <input type="date" name="birth" required>
+                    </li>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        성별
+                    </li>
+                        <select name="gender" id="">
+                            <option value="선택" selected>선택</option>
+                            <option value="남성">남성</option>
+                            <option value="여성">여성</option>
+                        </select>
+                </ul>
+                <ul class="container">
+                    <li class="item center">
+                        전화번호
+                    </li>
+                        <input type="text" name="phone_number" placeholder="휴대전화번호">
+                </ul>
+                <ul class="container">
+                        <button class="submit">가입하기</button>
+                </ul>
+            </div>
+        </form>
+    </div>
